@@ -9,23 +9,23 @@ import time
 from oss_xml_handler import *
 from oss_api import *
 
-HOST="storage.aliyun.com"
+HOST="oss.aliyuncs.com"
 ACCESS_ID = "YOUR ACCESS ID"
 SECRET_ACCESS_KEY = "YOUR SECRET ACCESS KEY"
 #ACCESS_ID and SECRET_ACCESS_KEY should not be empty, please input correct one.
-   
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     #init oss,  get instance of oss
     if len(ACCESS_ID) == 0 or len(SECRET_ACCESS_KEY) == 0:
         print "Please make sure ACCESS_ID and SECRET_ACCESS_KEY are correct in ", __file__ , ", init are empty!"
-        exit(0) 
+        exit(0)
     oss = OssAPI(HOST, ACCESS_ID, SECRET_ACCESS_KEY)
     sep = "=============================="
-   
+
     #sign_url_auth_with_expire_time(self, method, url, headers = {}, resource="/", timeout = 60):
     method = "GET"
     bucket = "test" + time.strftime("%Y-%b-%d%H-%M-%S").lower()
-    object = "test_object" 
+    object = "test_object"
     url = "http://" + HOST + "/oss/" + bucket + "/" + object
     headers = {}
     resource = "/" + bucket + "/" + object
@@ -68,10 +68,10 @@ if __name__ == "__main__":
     else:
         print "put_object_from_string ERROR"
     print sep
-    
+
     #put_object_from_file(self, bucket, object, filename, content_type=DefaultContentType, headers = {}):
     object = "object_test"
-    filename = __file__ 
+    filename = __file__
     content_type = "text/HTML"
     headers = {}
     res = oss.put_object_from_file(bucket, object, filename, content_type, headers)
@@ -80,7 +80,7 @@ if __name__ == "__main__":
     else:
         print "put_object_from_file ERROR"
     print sep
- 
+
     #put_object_from_fp(self, bucket, object, fp, content_type=DefaultContentType, headers = {}):
     object = "object_test"
     filename = __file__
@@ -134,13 +134,13 @@ if __name__ == "__main__":
     else:
         print "head_object ERROR"
     print sep
-    
+
     #get_bucket_acl(self, bucket):
     res = oss.get_bucket_acl(bucket)
     if (res.status / 100) == 2:
         body = res.read()
         h = GetBucketAclXml(body)
-        print "bucket acl is:", h.grant 
+        print "bucket acl is:", h.grant
     else:
         print "get bucket acl ERROR"
     print sep
@@ -163,9 +163,9 @@ if __name__ == "__main__":
         for i in common_list:
             print i
     print sep
- 
+
     #upload_large_file(self, bucket, object, filename, thread_num = 10, max_part_num = 1000):
-    res = oss.upload_large_file(bucket, object, __file__)    
+    res = oss.upload_large_file(bucket, object, __file__)
     if (res.status / 100) == 2:
         print "upload_large_file OK"
     else:

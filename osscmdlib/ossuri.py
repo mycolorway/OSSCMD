@@ -32,7 +32,7 @@ class OSSUri(object):
             except ValueError, e:
                 continue
         raise ValueError("%s: not a recognized URI" % string)
-    
+
     def __str__(self):
         return self.uri()
 
@@ -61,7 +61,7 @@ class OSSUriOSS(OSSUri):
 
     def object(self):
         return self._object
-    
+
     def has_bucket(self):
         return bool(self._bucket)
 
@@ -70,12 +70,12 @@ class OSSUriOSS(OSSUri):
 
     def uri(self):
         return "/".join(["oss:/", self._bucket, self._object])
-    
+
     def public_url(self):
-        return "http://storage.aliyun.com/%s/%s" % (self._bucket, self._object)
+        return "http://oss.aliyuncs.com/%s/%s" % (self._bucket, self._object)
 
     def host_name(self):
-        return "http://storage.aliyun.com/%s/" % (self._bucket)
+        return "http://oss.aliyuncs.com/%s/" % (self._bucket)
 
     @staticmethod
     def compose_uri(bucket, object = ""):
@@ -125,4 +125,4 @@ if __name__ == "__main__":
     print "uri.type=", uri.type
     print "path    =", uri.path()
     print
-    
+

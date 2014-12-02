@@ -7,7 +7,7 @@ class Config(object):
     _parsed_files = []
     access_id = ""
     secret_access_key = ""
-    host_base = "storage.aliyun.com"
+    host_base = "oss.aliyuncs.com"
     verbosity = logging.WARNING
     list_md5 = False
     human_readable_sizes = False
@@ -86,7 +86,7 @@ class ConfigParser(object):
     def __init__(self, file, sections = []):
         self.cfg = {}
         self.parse_file(file, sections)
-    
+
     def parse_file(self, file, sections = []):
         debug("ConfigParser: Reading file '%s'" % file)
         if type(sections) != type([]):
@@ -122,10 +122,10 @@ class ConfigParser(object):
 
     def __getitem__(self, name):
         return self.cfg[name]
-    
+
     def __setitem__(self, name, value):
         self.cfg[name] = value
-    
+
     def get(self, name, default = None):
         if self.cfg.has_key(name):
             return self.cfg[name]
